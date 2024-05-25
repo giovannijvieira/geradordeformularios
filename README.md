@@ -16,8 +16,8 @@ Para instalar e executar este projeto localmente, siga estas etapas:
 ### Clonando o Repositório
 Clone este repositório usando o comando abaixo:
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
-cd [NOME_DO_REPOSITÓRIO]
+git clone https://github.com/giovannijvieira/geradordeformularios
+cd geradordeformularios
 ```
 
 ### Abrindo o Projeto
