@@ -464,12 +464,12 @@ window.onscroll = function () {
   if (espacoNecessario > 0) {
     espacoAdicional.style.height = Math.min(espacoNecessario, limiteAltura) + 'px';
   } else {
-    espacoAdicional.style.height = '0px';
+    espacoAdicional.style.height = '10px';
   }
 
   var posicaoSidebar = window.scrollY > alturaContainer - limiteAltura ?
     alturaContainer - limiteAltura : window.scrollY;
-  sidebar.style.top = posicaoSidebar + 'px';
+  sidebar.style.top = posicaoSidebar + '-20px';
 };
 
 function addDropdownOptions(timestamp) {
