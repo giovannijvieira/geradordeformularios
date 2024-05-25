@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Protótipo de Questionário</title>
+  </head>
+<body>
+    <div class="header">
+      <i class="fas fa-file-alt"></i>
+      <input type="text" class="form-title-input" placeholder="Formulário sem título" />
+      <div class="header-right">
+        <i class="fas fa-palette"></i>
+        <i class="fas fa-eye" onclick="gerarVisualizacaoFormulario()"></i>
+        <i class="fas fa-undo"></i>
+        <i class="fas fa-redo"></i>
+        <button class="button">Enviar</button>
+        <i class="fas fa-ellipsis-v" style="padding-left: 20px"></i>
+        <img src="./images/estudante.jpg" class="profile-picture" />
+      </div>
+    </div>
+    <div class="header-navigation">
+      <span class="nav-item" id="nav-questions">Perguntas</span>
+      <span class="nav-item" id="nav-answers">
+        Respostas</span>
+      <span class="nav-item" id="nav-settings">Configurações</span>
+    </div>
+    <div class="toolbar">
+      <!-- <div class="btns" style="display: none;"> -->
+        <!-- Sidebar -->
+        <!-- Botões do Sidebar -->
+        <div class="container-de-botoes">
+          <button class="sidebar-icon" onclick="addQuestionCard()"><i class="fas fa-plus"></i></button>
+          <button class="sidebar-icon"><i class="fas fa-file-import"></i></button>
+          <button class="sidebar-icon"><i class="fas fa-heading"></i></button>
+          <button class="sidebar-icon"><i class="fas fa-image"></i></button>
+          <button class="sidebar-icon"><i class="fas fa-video"></i></button>
+          <button class="sidebar-icon"><i class="fas fa-stream"></i></button>
+        </div>
+      <!-- </div> -->
+       <!-- <button onclick="addQuestion()">
+        <i class="fas fa-question-circle"></i>
+      </button>
+      <select id="fontSizeSelector">
+        <option value="12px">12px</option>
+        <option value="14px">14px</option>
+        <option value="16px">16px</option>
+        <option value="18px">18px</option>
+        <option value="20px">20px</option>
+      </select>
+      <button onclick="addInput()"><i class="fas fa-keyboard"></i></button>
+      <button onclick="addTextarea()"><i class="fas fa-align-left"></i></button>
+      <button onclick="toggleStyle('bold', event)" data-style="bold">
+        <i class="fas fa-bold"></i>
+      </button>
+      <button onclick="toggleStyle('italic', event)" data-style="italic">
+        <i class="fas fa-italic"></i>
+      </button>
+      <button onclick="toggleStyle('underline', event)" data-style="underline">
+        <i class="fas fa-underline"></i>
+      </button>
+      <button onclick="openMenuListModal()">
+        <i class="fas fa-list-ul"></i>
+      </button>
+      <button onclick="openRadioButtonModal()">
+        <i class="fas fa-dot-circle"></i>
+      </button>
+      <button onclick="openCheckboxModal()">
+        <i class="fas fa-check-square"></i>
+      </button> -->
+    </div>
+
+    <!-- Modal para Adicionar Menu List -->
+    <div id="menuListModal" class="modal">
+      <div id="menuListOptions">
+        <input type="text" class="input-field" placeholder="Opção 1" />
+        <input type="text" class="input-field" placeholder="Opção 2" />
+      </div>
+      <button onclick="addOption('menuListOptions')">
+        <i class="fas fa-plus"></i>
+      </button>
+      <button onclick="addMenuListToEditor()">
+        <i class="fas fa-list"></i> Adicionar Menu List
+      </button>
+    </div>
+
+    <!-- Modal para Adicionar Radio Button -->
+    <div id="radioButtonModal" class="modal">
+      <div id="radioButtonOptions">
+        <input type="text" class="input-field" placeholder="Opção 1" />
+        <input type="text" class="input-field" placeholder="Opção 2" />
+      </div>
+      <button onclick="addRadioButtonOption()">
+        <i class="fas fa-plus"></i>
+      </button>
+      <button onclick="addRadioButtonsToEditor()">
+        <i class="fas fa-dot-circle"></i> Adicionar Radio Buttons
+      </button>
+    </div>
+
+    <!-- Modal para Adicionar Checkbox -->
+    <div id="checkboxModal" class="modal">
+      <div id="checkboxOptions">
+        <input type="text" class="input-field" placeholder="Opção 1" />
+        <input type="text" class="input-field" placeholder="Opção 2" />
+      </div>
+      <button onclick="addCheckboxOption()"><i class="fas fa-plus"></i></button>
+      <button onclick="addCheckboxesToEditor()">
+        <i class="fas fa-check-square"></i> Adicionar Checkbox
+      </button>
+    </div>
+    <div class="questions-card" id="questionsCard">
+      <input type="text" class="questions-card-input" id="formTitleInput" placeholder="Formulário sem título" />
+      <div id="formattingToolbar" style="display: none;">
+        <button onclick="applyStyleToInput('bold')"><i class="fas fa-bold"></i></button>
+        <button onclick="applyStyleToInput('italic')"><i class="fas fa-italic"></i></button>
+        <button onclick="applyStyleToInput('underline')"><i class="fas fa-underline"></i></button>
+        <button onclick="insertLinkToInput()"><i class="fas fa-link"></i></button>
+        <button onclick="removeFormattingFromInput()"><i class="fas fa-eraser"></i></button>
+      </div>
+      <input type="text" class="questions-card-input" id="formDescriptionInput" placeholder="Descrição do formulário" />
+      <div id="descriptionFormattingToolbar" style="display: none;">
+        <button onclick="applyStyleToDescription('bold')"><i class="fas fa-bold"></i></button>
+        <button onclick="applyStyleToDescription('italic')"><i class="fas fa-italic"></i></button>
+        <button onclick="applyStyleToDescription('underline')"><i class="fas fa-underline"></i></button>
+        <button onclick="insertLinkToDescription()"><i class="fas fa-link"></i></button>
+        <button onclick="createNumberedList()"><i class="fas fa-list-ol"></i></button>
+        <button onclick="createBulletedList()"><i class="fas fa-list-ul"></i></button>
+        <button onclick="removeFormattingFromDescription()"><i class="fas fa-eraser"></i></button>
+      </div>
+    </div>
+
+    <!-- Cartão de Respostas -->
+    <div class="answers-card" id="answersCard" style="display: none;">
+      <div class="answers-card-content">
+        <span class="answers-text">0 resposta</span>
+        <i class="fas fa-ellipsis-v answers-settings-icon"></i>
+      </div>
+      <div class="response-toggle">
+        <label class="switch">
+          <input type="checkbox" id="responseToggle">
+          <span class="slider round"></span>
+        </label>
+        <span id="responseStatus">Aceitando respostas</span>
+      </div>
+    </div>
+    <div id="questionsContainer"></div>
+    <div class="sidebar" style="display: none;">
+      <!-- Sidebar -->
+      <!-- Botões do Sidebar -->
+      <button class="sidebar-icon" onclick="addQuestionCard()"><i class="fas fa-plus"></i></button>
+      <button class="sidebar-icon"><i class="fas fa-file-import"></i></button>
+      <button class="sidebar-icon"><i class="fas fa-heading"></i></button>
+      <button class="sidebar-icon"><i class="fas fa-image"></i></button>
+      <button class="sidebar-icon"><i class="fas fa-video"></i></button>
+      <button class="sidebar-icon"><i class="fas fa-stream"></i></button>
+    </div>
+
+    <!-- Card de Configurações -->
+    <div class="settings-card" id="settingsCard" style="display: none;">
+      <div class="card">
+        <h2>Configurações</h2>
+        <details>
+          <summary>Criar teste</summary>
+          <p>Atribua pontuações, defina as respostas e dê feedback automaticamente.</p>
+        </details>
+        <details>
+          <summary>Respostas</summary>
+          <p>Gerenciar como as respostas são coletadas e protegidas.</p>
+        </details>
+        <details>
+          <summary>Apresentação</summary>
+          <p>Gerenciar como o formulário e as respostas são apresentadas.</p>
+        </details>
+      </div>
+      <div class="card">
+        <h2>Padrões</h2>
+        <details>
+          <summary>Configurações padrão dos formulários</summary>
+          <p>Configurações aplicadas a este e a novos formulários.</p>
+        </details>
+        <details>
+          <summary>Configurações padrão das perguntas</summary>
+          <p>Configurações aplicadas a todas as novas perguntas.</p>
+        </details>
+      </div>
+    </div>
+    <div class="editor" contenteditable="true" onclick="selectElement(event)"></div>
+    <div class="details"></div>
+    </div>
+    <div class="container">
+      <div class="editor" contenteditable="true" onclick="selectElement(event)"></div>
+      <div class="details"></div>
+      <div id="espacoAdicional" style="height: 0;"></div>
+    </div>
+ <script src="./script/scripts.js"></script>
+ </body>
+</html>
