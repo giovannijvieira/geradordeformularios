@@ -1118,6 +1118,22 @@ html {
   html {
     font-size: 14px;
   }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding-top: 10px;
+    z-index: 1000;
+    margin-left: 125vh;
+    margin-top: 25vh;
+    transition: top 8ms ease;
+  }
 }
 
 @media (max-width: 992px) {
